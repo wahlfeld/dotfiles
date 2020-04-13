@@ -1,0 +1,5 @@
+*.DS_Store
+*.lock.json
+
+# temp files directories
+cache/*
