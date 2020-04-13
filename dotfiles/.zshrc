@@ -5,14 +5,14 @@ export GOPATH=$(go env GOPATH)
 export GOBIN=$(go env GOPATH)/bin
 export PATH=~/Library/Python/2.7/bin:$PATH # awscli
 export PATH=$HOME/bin:$PATH #aws-iam-authenticator
-export PATH=$PATH:/Users/curtiswahlfeld/istio-1.4.3/bin
+export PATH=$PATH:$HOME/istio-1.4.3/bin
 export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Set python3 as default
 alias python=/usr/local/bin/python3.7
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/curtiswahlfeld/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,

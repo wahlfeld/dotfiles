@@ -1,8 +1,7 @@
 ## Git-less download
 
 ```
-mkdir -p ~/projects && cd ~/projects \
-curl -L https://github.com/wahlfeld/dotfiles/tarball/master | tar -xzv
+mkdir -p $HOME/projects && cd $HOME/projects && curl -L https://github.com/wahlfeld/dotfiles/tarball/master | tar -xzv
 ```
 
 ## Setup dotfiles, brew, few other things
@@ -12,3 +11,5 @@ curl -L https://github.com/wahlfeld/dotfiles/tarball/master | tar -xzv
 Note: You may have to run it a couple times because xcode and ohmyzsh will end the script
 
 ## todo
+
+N/A
