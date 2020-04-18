@@ -8,10 +8,9 @@ mkdir -p $HOME/projects && cd $HOME/projects && curl -L https://github.com/wahlf
 
 `./setup`
 
-Note: You may have to run it a couple times because xcode and ohmyzsh will end the script
+Note: You may need to restart your Mac in order for the terminal font to work correctly.
 
-## todo
+## Todo
 
-* fix iterm prefs in script
-* fix font installer
-* fix iterm fonts
+* Fix issue where installer stops after brew installs
+* iTerm2 preferences include my name instead of $HOME

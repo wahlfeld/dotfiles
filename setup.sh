@@ -5,6 +5,8 @@ BIN="/usr/local/bin"
 ZSH_PATH="$HOME/.oh-my-zsh"
 
 [ -d "$HOME/projects" ] || mkdir -p $HOME/projects
+[ -d "$HOME/.ssh" ] || mkdir $HOME/.ssh
+[ -d "$HOME/Library/Fonts" ] || mkdir $HOME/Library/Fonts
 [ -d "./cache" ] || mkdir -p ./cache
 
 # brew
@@ -17,14 +19,17 @@ brew bundle
 test -f $ZSH_PATH/oh-my-zsh.sh || 
     { cd ./cache/ ;
     curl -O https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh ; 
-    chmod +x ./install.sh && ./install.sh --unattended && cd - ; }
+    chmod +x ./install.sh && ./install.sh --unattended && cd - ; 
+    chsh -s /bin/zsh ; }
 
 test -f $ZSH_PATH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ||
     { git clone git://github.com/zsh-users/zsh-autosuggestions.git $ZSH_PATH/custom/plugins/zsh-autosuggestions ; }
 test -f $ZSH_PATH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ||
     { git clone git://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PATH/custom/plugins/zsh-syntax-highlighting ; }
 
-test -f $ZSH_PATH/themes/agnoster-edit.zsh-theme || cp ./ohmyzsh/agnoster-edit.zsh-theme $ZSH_PATH/themes/
+# themes
+test -f $ZSH_PATH/themes/agnoster-edit.zsh-theme || cp ./terminal/agnoster-edit.zsh-theme $ZSH_PATH/themes/
+test -f $HOME/Library/Fonts/Meslo\ LG\ M\ Regular\ for\ Powerline.ttf || cp ./terminal/Meslo\ LG\ M\ Regular\ for\ Powerline.ttf $HOME/Library/Fonts/
 
 # for each dotfile, symlink to home directory
 for i in `find ./dotfiles -maxdepth 1 | cut -c 3- | grep -v -e "^\s*$"`; do ln -svf $PWD/$i $HOME; done
@@ -42,12 +47,6 @@ test -f $BIN/session-manager-plugin ||
 
 # aws-azure-login
 test -f $BIN/aws-azure-login || npm install -g aws-azure-login
-
-# powerline fonts for iterm2
-test -f $HOME/projects/fonts/install.sh || 
-    { git clone git://github.com/powerline/fonts.git $HOME/projects/fonts ;
-    mkdir -p $HOME/Library/Fonts ;
-    $HOME/projects/fonts/install.sh ; }
 
 # set iterm2 custom preferences
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/iterm2"
