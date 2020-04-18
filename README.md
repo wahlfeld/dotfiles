@@ -12,4 +12,6 @@ Note: You may have to run it a couple times because xcode and ohmyzsh will end t
 
 ## todo
 
-N/A
+* fix iterm prefs in script
+* fix font installer
+* fix iterm fonts
