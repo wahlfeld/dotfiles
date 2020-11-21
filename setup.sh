@@ -1,25 +1,34 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-BIN="/usr/local/bin"
+# set -o xtrace
+
+mkdir -p $HOME/.local/bin
+workdir=$PWD
+CACHE=$PWD/cache
+LOCAL="$HOME/.local"
+BIN="$HOME/.local/bin"
 ZSH_PATH="$HOME/.oh-my-zsh"
 
-[ -d "$HOME/projects" ] || mkdir -p $HOME/projects
+[ -d "$HOME/git" ] || mkdir $HOME/git
 [ -d "$HOME/.ssh" ] || mkdir $HOME/.ssh
 [ -d "$HOME/Library/Fonts" ] || mkdir $HOME/Library/Fonts
-[ -d "./cache" ] || mkdir -p ./cache
+[ -d "./cache" ] || mkdir $workdir/cache
 
 # brew
-test -f $BIN/brew || yes "" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+test -f $LOCAL/homebrew/bin/brew || 
+    { mkdir $LOCAL/homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $LOCAL/homebrew ; }
 test -f $BIN/k9s || brew tap derailed/k9s
 test -f $BIN/tfswitch || brew tap warrensbox/tap
+test -f $BIN/hcledit || brew tap minamijoyo/hcledit
+test -f $BIN/saw || brew tap TylerBrock/saw
 brew bundle
 
 # ohmyzsh
 test -f $ZSH_PATH/oh-my-zsh.sh || 
-    { cd ./cache/ ;
+    { cd $workdir/$CACHE/ ;
     curl -O https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh ; 
-    chmod +x ./install.sh && ./install.sh --unattended && cd - ; 
+    chmod +x $workdir/install.sh && $workdir/install.sh --unattended && cd - ; 
     chsh -s /bin/zsh ; }
 
 test -f $ZSH_PATH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ||
@@ -28,26 +37,52 @@ test -f $ZSH_PATH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting
     { git clone git://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PATH/custom/plugins/zsh-syntax-highlighting ; }
 
 # themes
-test -f $ZSH_PATH/themes/agnoster-edit.zsh-theme || cp ./terminal/agnoster-edit.zsh-theme $ZSH_PATH/themes/
-test -f $HOME/Library/Fonts/Meslo\ LG\ M\ Regular\ for\ Powerline.ttf || cp ./terminal/Meslo\ LG\ M\ Regular\ for\ Powerline.ttf $HOME/Library/Fonts/
+test -f $ZSH_PATH/themes/agnoster-edit.zsh-theme || cp $workdir/terminal/agnoster-edit.zsh-theme $ZSH_PATH/themes/
+test -f $HOME/Library/Fonts/Meslo\ LG\ M\ Regular\ for\ Powerline.ttf || cp $workdir/terminal/Meslo\ LG\ M\ Regular\ for\ Powerline.ttf $HOME/Library/Fonts/
 
 # for each dotfile, symlink to home directory
 for i in `find ./dotfiles -maxdepth 1 | cut -c 3- | grep -v -e "^\s*$"`; do ln -svf $PWD/$i $HOME; done
 
 # aws cli 2
+rm -rf $CACHE/choices.xml
+cat >> $CACHE/choices.xml <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <array>
+    <dict>
+      <key>choiceAttribute</key>
+      <string>customLocation</string>
+      <key>attributeSetting</key>
+      <string>$LOCAL</string>
+      <key>choiceIdentifier</key>
+      <string>default</string>
+    </dict>
+  </array>
+</plist>
+EOF
 test -f $BIN/aws || 
-    { curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "cache/AWSCLIV2.pkg" ; 
-    sudo installer -pkg ./cache/AWSCLIV2.pkg -target / ; }
+    { curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "$CACHE/AWSCLIV2.pkg" ; 
+    installer -pkg $CACHE/AWSCLIV2.pkg -target CurrentUserHomeDirectory -applyChoiceChangesXML $CACHE/choices.xml ; 
+    ln -s $LOCAL/aws-cli/aws $BIN/aws ; 
+    ln -s $LOCAL/aws-cli/aws_completer $BIN/aws_completer ; }
 
 # aws ssm cli plugin
 test -f $BIN/session-manager-plugin || 
-    { curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessionmanager-bundle.zip" -o "cache/sessionmanager-bundle.zip" ;
-    unzip -o ./cache/sessionmanager-bundle.zip -d ./cache/ ;
-    sudo ./cache/sessionmanager-bundle/install -i /usr/local/sessionmanagerplugin -b $BIN/session-manager-plugin ; }
+    { curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessionmanager-bundle.zip" -o "$CACHE/sessionmanager-bundle.zip" ;
+    unzip -o $workdir/$CACHE/sessionmanager-bundle.zip -d $workdir/$CACHE/ ;
+    $workdir/$CACHE/sessionmanager-bundle/install -i $BIN/sessionmanagerplugin -b $BIN/session-manager-plugin ; }
 
 # aws-azure-login
-test -f $BIN/aws-azure-login || npm install -g aws-azure-login
+test -f $BIN/aws-azure-login || npm install -g --prefix $LOCAL aws-azure-login
 
 # set iterm2 custom preferences
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/iterm2"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+# git
+read -rep "(git setup) Enter your first name: " FIRST_NAME
+read -rep "(git setup) Enter your last name: " LAST_NAME
+read -rep "(git setup) Enter your email address: " EMAIL
+git config --global user.name "$FIRST_NAME $LAST_NAME"
+git config --global user.email "$EMAIL"

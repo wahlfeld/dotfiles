@@ -1,17 +1,26 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:$(go env GOPATH)/bin
-export GOPATH=$(go env GOPATH)
-export GOBIN=$(go env GOPATH)/bin
-export PATH=~/Library/Python/2.7/bin:$PATH # awscli
-export PATH=$HOME/bin:$PATH #aws-iam-authenticator
-export PATH=$PATH:$HOME/istio-1.4.3/bin
+
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# Homebrew 
+export BREWPATH=$HOME/.local/homebrew/bin
+export PATH=$BREWPATH:$PATH
+export HOMEBREW_CASK_OPTS="--appdir=$BREWPATH"
 
 # Set python3 as default
 alias python=/usr/local/bin/python3.7
 
-# Path to your oh-my-zsh installation.
+# Go
+export GOPATH=$(go env GOPATH)
+export GOBIN=$(go env GOPATH)/bin
+export PATH=$PATH:$(go env GOPATH)/bin
+
+# AWS
+export AWS_SDK_LOAD_CONFIG=true
+export AWS_PAGER=""
+
+# Path to your oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -68,6 +77,14 @@ ZSH_THEME="agnoster-edit"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# ZSH
+ZSH_DISABLE_COMPFIX=true
+HISTSIZE=1000000000
+SAVEHIST=1000000000
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt appendhistory
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -78,7 +95,6 @@ plugins=(
   docker
   git
   git-auto-fetch
-  go
   golang
   helm
   history
@@ -138,5 +154,4 @@ alias tfa="terraform apply"
 alias tfd="terraform destroy"
 alias tfp="terraform plan"
 alias k="kubectl"
-alias sv="serverless"
 alias rf="rm -rf"

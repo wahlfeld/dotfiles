@@ -1,5 +1,6 @@
 *.DS_Store
 *.lock.json
+*.gitconfig
 
 # temp files directories
 cache/*
