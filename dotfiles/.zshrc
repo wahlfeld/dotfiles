@@ -1,12 +1,12 @@
 # If you come from bash you might have to change your $PATH.
 
 export PATH=$HOME/.local/bin:$PATH
-export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH=$PATH:"$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Homebrew 
 export BREWPATH=$HOME/.local/homebrew/bin
 export PATH=$BREWPATH:$PATH
-export HOMEBREW_CASK_OPTS="--appdir=$BREWPATH"
+export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 
 # Set python3 as default
 alias python=/usr/local/bin/python3.7
