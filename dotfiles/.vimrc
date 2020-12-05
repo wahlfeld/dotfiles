@@ -1,5 +1,5 @@
 syntax on " Show colour highlighting
-set nu " Show line numbders
+" set nu " Show line numbers
 set backspace=2 " Allow normal deletes
 " set laststatus=2
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')} " Status bar

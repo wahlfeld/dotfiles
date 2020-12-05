@@ -3,12 +3,16 @@
 set -euo pipefail
 # set -o xtrace
 
-mkdir -p $HOME/.local/bin
 WORKDIR=$PWD
 CACHE=$WORKDIR/cache
 LOCAL="$HOME/.local"
-BIN="$HOME/.local/bin"
+mkdir -p $LOCAL/bin
+BIN="$LOCAL/bin"
 ZSH_PATH="$HOME/.oh-my-zsh"
+
+export PATH=$LOCAL:$PATH
+export PATH=$LOCAL/bin:$PATH
+export PATH=$LOCAL/homebrew/bin:$PATH
 
 [ -d "$HOME/git" ] || mkdir $HOME/git
 [ -d "$HOME/.ssh" ] || mkdir $HOME/.ssh
@@ -31,7 +35,6 @@ test -f $ZSH_PATH/oh-my-zsh.sh ||
     { cd $CACHE/ ;
     curl -O https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh ; 
     chmod +x $CACHE/install.sh && $CACHE/install.sh --unattended && cd - ; }
-    # chsh -s /bin/zsh ; }
 
 test -f $ZSH_PATH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ||
     { git clone git://github.com/zsh-users/zsh-autosuggestions.git $ZSH_PATH/custom/plugins/zsh-autosuggestions ; }
@@ -76,7 +79,7 @@ test -f $BIN/session-manager-plugin ||
     $CACHE/sessionmanager-bundle/install -i $BIN/sessionmanagerplugin -b $BIN/session-manager-plugin ; }
 
 # aws-azure-login
-test -f $BIN/aws-azure-login || npm install -g --prefix $LOCAL aws-azure-login
+test -f $LOCAL/homebrew/bin/aws-azure-login || npm install -g aws-azure-login
 
 # set iterm2 custom preferences
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/iterm2"

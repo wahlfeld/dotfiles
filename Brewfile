@@ -1,4 +1,5 @@
 cask_args appdir: "~/Applications"
+tap "homebrew/cask"
 tap "derailed/k9s"
 tap "warrensbox/tap"
 tap "minamijoyo/hcledit"
