@@ -3,13 +3,12 @@
 set -euo pipefail
 # set -o xtrace
 
-WORKDIR=$PWD
-CACHE=$WORKDIR/cache
-LOCAL="$HOME/.local"
+export WORKDIR=$PWD
+export CACHE=$WORKDIR/cache
+export LOCAL="$HOME/.local"
 mkdir -p $LOCAL/bin
-BIN="$LOCAL/bin"
-ZSH_PATH="$HOME/.oh-my-zsh"
-
+export BIN="$LOCAL/bin"
+export ZSH_PATH="$HOME/.oh-my-zsh"
 export PATH=$LOCAL:$PATH
 export PATH=$LOCAL/bin:$PATH
 export PATH=$LOCAL/homebrew/bin:$PATH

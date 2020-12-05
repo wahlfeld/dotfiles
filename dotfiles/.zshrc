@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 
+export PATH=/usr/local/bin/:$PATH 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:"$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
@@ -9,7 +10,8 @@ export PATH=$BREWPATH:$PATH
 export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 
 # Set python3 as default
-alias python=/usr/local/bin/python3.7
+alias python=python3
+alias pip=pip3
 
 # Go
 export GOPATH=$(go env GOPATH)
