@@ -17,7 +17,7 @@
 	<key>BootstrapDaemon</key>
 	<false/>
 	<key>Command</key>
-	<string>/bin/zsh</string>
+	<string></string>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>Dracula</key>
@@ -390,7 +390,7 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>320 333 799 448 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 47 1440 830 0 0 1440 877 </string>
+	<string>0 350 650 527 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_513F6AF4-1331-40CC-BCDD-CFFB51F23B36</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_513F6AF4-1331-40CC-BCDD-CFFB51F23B36_selection</key>
@@ -1186,7 +1186,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>BFD216EE-39CC-4B66-B5D5-0683B7D4A587</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>57</integer>
+	<integer>58</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>

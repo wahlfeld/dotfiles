@@ -20,7 +20,8 @@ export PATH=$LOCAL/homebrew/bin:$PATH
 
 read -rep "Install Xcode? " y
 case $y in
-    [Yy]* ) xcode-select --install;;
+    [Yy]* ) xcode-select --install ;
+            exit 0 ;;
     * ) ;;
 esac
 
