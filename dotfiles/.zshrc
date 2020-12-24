@@ -93,7 +93,6 @@ setopt appendhistory
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  aws
   docker
   git
   git-auto-fetch
@@ -151,6 +150,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias nupbrew="HOMEBREW_NO_AUTO_UPDATE=1 brew"
 alias tf="terraform"
 alias tfa="terraform apply"
 alias tfd="terraform destroy"
