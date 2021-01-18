@@ -1,26 +1,37 @@
 # If you come from bash you might have to change your $PATH.
 
-export PATH=/usr/local/bin/:$PATH 
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$PATH:"$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
 # Homebrew 
 export BREWPATH=$HOME/.local/homebrew/bin
-export PATH=$BREWPATH:$PATH
 export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 
-# Set python3 as default
-alias python=python3
-alias pip=pip3
+# $PATH ordering
+export PATH="$HOME/Library/Python/3.9/bin":$PATH
+export PATH="/usr/local/bin/":$PATH 
+export PATH=$BREWPATH:$PATH
+export PATH="$HOME/.local/bin":$PATH
+export PATH=$PATH:"$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# Python
+export PYTHONPATH="$HOME/Library/Python/3.9/lib/python/site-packages"
 
 # Go
 export GOPATH=$(go env GOPATH)
 export GOBIN=$(go env GOPATH)/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 
+# Ruby
+export GEM_PATH="$HOME/.local/ruby"
+export GEM_HOME="$HOME/.local/ruby"
+
 # AWS
 export AWS_SDK_LOAD_CONFIG=true
 export AWS_PAGER=""
+
+export PATH="$PATH:$HOME/.bash-my-aws/bin"
+source ~/.bash-my-aws/aliases
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+source ~/.bash-my-aws/bash_completion.sh
 
 # Path to your oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
@@ -80,11 +91,22 @@ ZSH_THEME="agnoster-edit"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # ZSH
-ZSH_DISABLE_COMPFIX=true
+HISTFILESIZE=1000000000
 HISTSIZE=1000000000
 SAVEHIST=1000000000
-setopt SHARE_HISTORY
+setopt BANG_HIST
+setopt EXTENDED_HISTORY
+setopt HIST_BEEP
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_VERIFY
 setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 setopt appendhistory
 
 # Which plugins would you like to load?
@@ -93,26 +115,7 @@ setopt appendhistory
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  docker
-  git
-  git-auto-fetch
-  golang
-  helm
-  history
   iterm2
-  jira
-  kubectl
-  node
-  npm
-  pip
-  python
-  ssh-agent
-  sudo
-  systemd
-  terraform
-  vault
-  vim-interaction
-  vscode
   zsh-autosuggestions
   zsh-syntax-highlighting
   )
@@ -150,10 +153,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias nupbrew="HOMEBREW_NO_AUTO_UPDATE=1 brew"
-alias tf="terraform"
-alias tfa="terraform apply"
-alias tfd="terraform destroy"
-alias tfp="terraform plan"
 alias k="kubectl"
+alias kl="kubectl logs"
+alias lsa="ls -lha"
+alias nupbrew="HOMEBREW_NO_AUTO_UPDATE=1 brew"
+alias pip=pip3
+alias python=python3
 alias rf="rm -rf"
+alias tf="terraform"

@@ -79,11 +79,18 @@ test -f "$BIN"/session-manager-plugin ||
     "$CACHE"/sessionmanager-bundle/install -i "$BIN"/sessionmanagerplugin -b "$BIN"/session-manager-plugin ; }
 
 # aws-azure-login
-test -f "$LOCAL"/homebrew/bin/aws-azure-login || npm install -g aws-azure-login
+test -f "$BIN"/aws-azure-login || npm install -g aws-azure-login
 
 # set iterm2 custom preferences
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/iterm2"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+# lightshot screenshot
+read -rep "Install Lightshot Screenshot? " y
+case $y in
+    [Yy]* ) mas install 808809998 ;;
+    * ) ;;
+esac
 
 # git
 read -rep "Configure Git? " y

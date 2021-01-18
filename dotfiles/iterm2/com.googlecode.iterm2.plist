@@ -354,10 +354,10 @@
 	<false/>
 	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
 	<array>
-		<string>0.000000, 0.000000, 224.000000, 258.000000, NO, NO</string>
-		<string>0.000000, 259.000000, 224.000000, 48.000000, NO, NO</string>
+		<string>0.000000, 0.000000, 224.000000, 255.000000, NO, NO</string>
+		<string>0.000000, 256.000000, 224.000000, 48.000000, NO, NO</string>
 	</array>
-	<key>NSTableView Columns v2 KeyBingingTable</key>
+	<key>NSTableView Columns v3 KeyBingingTable</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
 	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVVBcnJheYABrgsMEx4fICEiIyQqNDU2VSRu
@@ -386,11 +386,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>0 130 224 275 0 0 1440 877 </string>
+	<string>0 134 224 275 0 0 1440 875 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>320 333 799 448 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 350 650 527 0 0 1440 877 </string>
+	<string>0 53 1440 822 0 0 1440 875 </string>
 	<key>NeverWarnAboutShortLivedSessions_513F6AF4-1331-40CC-BCDD-CFFB51F23B36</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_513F6AF4-1331-40CC-BCDD-CFFB51F23B36_selection</key>
@@ -1096,7 +1096,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>MesloLGMForPowerline-Regular 14</string>
+			<string>MesloLGMForPowerline-Regular 13</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1186,7 +1186,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>BFD216EE-39CC-4B66-B5D5-0683B7D4A587</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>58</integer>
+	<integer>75</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
