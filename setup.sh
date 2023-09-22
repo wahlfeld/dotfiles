@@ -26,20 +26,20 @@ case $y in
 esac
 
 # brew
-test -f "$LOCAL"/homebrew/bin/brew || 
+test -f "$LOCAL"/homebrew/bin/brew ||
     { mkdir "$LOCAL"/homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C "$LOCAL"/homebrew ; }
 brew bundle
 
 # zsh
-test -f "$ZSH_PATH"/oh-my-zsh.sh || 
+test -f "$ZSH_PATH"/oh-my-zsh.sh ||
     { cd "$CACHE"/ ;
-    curl -O https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh ; 
+    curl -O https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh ;
     chmod +x "$CACHE"/install.sh && "$CACHE"/install.sh --unattended && cd - ; }
 
 test -f "$ZSH_PATH"/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ||
-    { git clone git://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_PATH"/custom/plugins/zsh-autosuggestions ; }
+    { git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_PATH"/custom/plugins/zsh-autosuggestions ; }
 test -f "$ZSH_PATH"/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ||
-    { git clone git://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_PATH"/custom/plugins/zsh-syntax-highlighting ; }
+    { git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_PATH"/custom/plugins/zsh-syntax-highlighting ; }
 
 # themes
 test -f "$ZSH_PATH"/themes/agnoster-edit.zsh-theme || cp "$WORKDIR"/terminal/agnoster-edit.zsh-theme "$ZSH_PATH"/themes/
@@ -66,14 +66,14 @@ cat >> "$CACHE"/choices.xml <<EOF
   </array>
 </plist>
 EOF
-test -f "$BIN"/aws || 
-    { curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "$CACHE/AWSCLIV2.pkg" ; 
-    installer -pkg "$CACHE"/AWSCLIV2.pkg -target CurrentUserHomeDirectory -applyChoiceChangesXML "$CACHE"/choices.xml ; 
-    ln -s "$LOCAL"/aws-cli/aws "$BIN"/aws ; 
+test -f "$BIN"/aws ||
+    { curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "$CACHE/AWSCLIV2.pkg" ;
+    installer -pkg "$CACHE"/AWSCLIV2.pkg -target CurrentUserHomeDirectory -applyChoiceChangesXML "$CACHE"/choices.xml ;
+    ln -s "$LOCAL"/aws-cli/aws "$BIN"/aws ;
     ln -s "$LOCAL"/aws-cli/aws_completer "$BIN"/aws_completer ; }
 
 # aws ssm cli plugin
-test -f "$BIN"/session-manager-plugin || 
+test -f "$BIN"/session-manager-plugin ||
     { curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessionmanager-bundle.zip" -o "$CACHE/sessionmanager-bundle.zip" ;
     unzip -o "$CACHE"/sessionmanager-bundle.zip -d "$CACHE"/ ;
     "$CACHE"/sessionmanager-bundle/install -i "$BIN"/sessionmanagerplugin -b "$BIN"/session-manager-plugin ; }
@@ -84,13 +84,6 @@ test -f "$BIN"/aws-azure-login || npm install -g aws-azure-login
 # set iterm2 custom preferences
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/iterm2"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-
-# lightshot screenshot
-read -rep "Install Lightshot Screenshot? " y
-case $y in
-    [Yy]* ) mas install 808809998 ;;
-    * ) ;;
-esac
 
 # git
 read -rep "Configure Git? " y

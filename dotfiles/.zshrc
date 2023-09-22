@@ -1,27 +1,16 @@
 # If you come from bash you might have to change your $PATH.
 
-# Homebrew 
+# Homebrew
 export BREWPATH=$HOME/.local/homebrew/bin
 export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 
 # $PATH ordering
-export PATH="$HOME/Library/Python/3.9/bin":$PATH
-export PATH="/usr/local/bin/":$PATH 
 export PATH=$BREWPATH:$PATH
 export PATH="$HOME/.local/bin":$PATH
 export PATH=$PATH:"$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Python
 export PYTHONPATH="$HOME/Library/Python/3.9/lib/python/site-packages"
-
-# Go
-export GOPATH=$(go env GOPATH)
-export GOBIN=$(go env GOPATH)/bin
-export PATH=$PATH:$(go env GOPATH)/bin
-
-# Ruby
-export GEM_PATH="$HOME/.local/ruby"
-export GEM_HOME="$HOME/.local/ruby"
 
 # AWS
 export AWS_SDK_LOAD_CONFIG=true
@@ -118,7 +107,7 @@ plugins=(
   iterm2
   zsh-autosuggestions
   zsh-syntax-highlighting
-  )
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -154,9 +143,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias k="kubectl"
-alias kl="kubectl logs"
 alias lsa="ls -lha"
-alias nupbrew="HOMEBREW_NO_AUTO_UPDATE=1 brew"
 alias pip=pip3
 alias python=python3
 alias rf="rm -rf"
